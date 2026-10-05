@@ -1,0 +1,316 @@
+<?php
+session_start();
+
+// Verifica se o estudante está logado
+if (!isset($_SESSION['ra'])) {
+    header("Location: login-estudante.php");
+    exit;
+}
+
+$servidor = "localhost";
+$usuario = "root";
+$senha_db = "";
+$banco = "banco_eras";
+
+$conexao = new mysqli($servidor, $usuario, $senha_db, $banco);
+
+if ($conexao->connect_error) {
+    die("Falha na conexão: " . $conexao->connect_error);
+}
+
+// Pega os dados do estudante usando o RA guardado na sessão
+$ra_logado = $_SESSION['ra'];
+$sql = "SELECT * FROM estudantes WHERE ra = '$ra_logado'";
+$resultado = $conexao->query($sql);
+$estudante = $resultado->fetch_assoc();
+
+$conexao->close();
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco ERAS - Painel do Estudante</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        
+        /* O body centraliza o conteúdo na tela grande e dá cor de fundo */
+        body { 
+            background-color: #f1f5f9; 
+            min-height: 100vh; 
+            color: #1e293b; 
+            display: flex; 
+            justify-content: center; 
+            align-items: flex-start;
+        }
+        
+        /* Container principal adaptável */
+        .app-container { 
+            width: 100%; 
+            max-width: 100%; 
+            background: #fff; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            position: relative; 
+            padding-bottom: 90px; 
+        }
+
+        /* Menu inferior responsivo (acompanha o container no PC) */
+        .nav-bar { 
+            position: fixed; 
+            bottom: 0; 
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 100%; 
+            max-width: 100%; 
+            background: white; 
+            border-top: 1px solid #e2e8f0; 
+            display: grid; 
+            grid-template-columns: repeat(5, 1fr); 
+            padding: 10px 0; 
+            text-align: center; 
+            z-index: 1000; 
+        }
+
+        /* Quando for tela de computador (maior que 768px) */
+        @media (min-width: 768px) {
+            body {
+                padding: 20px 0; /* Dá um respiro em cima e embaixo no PC */
+            }
+            .app-container {
+                max-width: 500px; /* Limita a largura para parecer um app de celular elegante */
+                min-height: calc(100vh - 40px);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+                border-radius: 24px;
+                overflow: hidden; /* Mantém as bordas arredondadas bonitas */
+            }
+            .nav-bar {
+                max-width: 500px; /* Trava o menu fixo exatamente na largura do app */
+                border-bottom-left-radius: 24px;
+                border-bottom-right-radius: 24px;
+            }
+        }
+        
+        /* Topo Azul */
+        .header-card { background: linear-gradient(135deg, #082258, #1d4ed8); color: white; padding: 24px 20px; border-bottom-left-radius: 28px; border-bottom-right-radius: 28px; }
+        .top-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+        .user-greeting { font-size: 19px; font-weight: 600; }
+        .user-school { font-size: 13px; opacity: 0.9; margin-top: 3px; }
+        .notification-btn { background: rgba(255,255,255,0.2); border: none; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; position: relative; cursor: pointer; }
+        .notification-badge { position: absolute; top: 4px; right: 4px; background: #ef4444; color: white; font-size: 10px; font-weight: 700; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+        /* Saldo */
+        .balance-box { background: rgba(255, 255, 255, 0.12); padding: 18px; border-radius: 16px; margin-bottom: 16px; }
+        .balance-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; font-weight: 600; }
+        .balance-value { font-size: 32px; font-weight: 700; margin: 4px 0; }
+        .balance-meta { font-size: 12px; opacity: 0.9; }
+
+        /* Limite Diário */
+        .limit-box { font-size: 12px; }
+        .limit-header { display: flex; justify-content: space-between; margin-bottom: 6px; opacity: 0.9; }
+        .progress-bar { background: rgba(255,255,255,0.2); height: 7px; border-radius: 4px; overflow: hidden; }
+        .progress-fill { background: #4ade80; width: 55%; height: 100%; border-radius: 4px; }
+
+        /* Corpo de Conteúdo */
+        .content-body { padding: 20px; flex: 1; }
+        
+        /* Ações Rápidas */
+        .quick-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; text-align: center; }
+        .action-item { display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; color: #334155; }
+        .action-icon { width: 100%; aspect-ratio: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+        .action-name { font-size: 12px; font-weight: 500; }
+
+        /* Meta Ativa */
+        .goal-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 18px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+        .goal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .goal-title { font-size: 15px; font-weight: 700; color: #0f172a; }
+        .goal-subtitle { font-size: 12px; color: #64748b; }
+        .goal-progress-bar { background: #f1f5f9; height: 7px; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+        .goal-progress-fill { background: #10b981; width: 40%; height: 100%; }
+        .goal-footer { display: flex; justify-content: space-between; font-size: 12px; color: #64748b; font-weight: 500; }
+
+        /* Últimos Gastos */
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .section-title { font-size: 17px; font-weight: 700; color: #0f172a; }
+        .section-link { font-size: 13px; color: #2563eb; text-decoration: none; font-weight: 600; }
+        
+        .transaction-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #f1f5f9; }
+        .transaction-left { display: flex; align-items: center; gap: 14px; }
+        .transaction-icon { width: 44px; height: 44px; background: #fff1f2; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+        .transaction-name { font-size: 14px; font-weight: 600; color: #0f172a; }
+        .transaction-date { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+        .transaction-value { font-size: 14px; font-weight: 700; color: #ef4444; }
+
+        /* Itens do Menu Inferior */
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #94a3b8; font-size: 11px; font-weight: 500; }
+        .nav-item.active { color: #2563eb; }
+        .nav-item span { font-size: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Topo com dados dinâmicos do banco -->
+        <div class="header-card">
+            <div class="top-row">
+                <div>
+                    <div class="user-greeting">Olá, <?php echo htmlspecialchars($estudante['nome_completo']); ?> 👋</div>
+                    <div class="user-school">Escola: <?php echo htmlspecialchars($estudante['escola']); ?></div>
+                </div>
+                <button class="notification-btn">
+                    🔔
+                    <span class="notification-badge">0</span>
+                </button>
+            </div>
+
+            <div class="balance-box">
+                <div class="balance-label">Saldo Disponível</div>
+                <div class="balance-value" id="saldo-atual">R$ <?php echo number_format($estudante['saldo'], 2, ',', '.'); ?></div>
+                <div class="balance-meta">Matrícula: <?php echo htmlspecialchars($estudante['ra']); ?></div>
+            </div>
+
+            <div class="limit-box">
+                <div class="limit-header">
+                    <span>Limite diário restante</span>
+                    <span>R$ 11,50 de R$ <?php echo number_format($estudante['limite_diario'], 2, ',', '.'); ?></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-body">
+        
+            <!-- Atalhos -->
+            <div class="quick-actions">
+                <a href="extrato.php" class="action-item">
+                    <div class="action-icon">📄</div>
+                    <div class="action-name">Extrato</div>
+                </a>
+                <a href="metas.php" class="action-item">
+                    <div class="action-icon">🎯</div>
+                    <div class="action-name">Metas</div>
+                </a>
+                <a href="perfil.php" class="action-item">
+                    <div class="action-icon">👤</div>
+                    <div class="action-name">Perfil</div>
+                </a>
+                <a href="educacao-financeira.php" class="action-item">
+                    <div class="action-icon">📖</div>
+                    <div class="action-name">Educação</div>
+                </a>
+            </div>
+
+            <!-- Meta Ativa -->
+            <div class="goal-card">
+                <div class="goal-header">
+                    <div>
+                        <div class="goal-title">Livro de Física</div>
+                        <div class="goal-subtitle">Meta ativa</div>
+                    </div>
+                    <span style="color: #10b981; font-size: 16px;">📈</span>
+                </div>
+                <div class="goal-progress-bar">
+                    <div class="goal-progress-fill"></div>
+                </div>
+                <div class="goal-footer">
+                    <span>R$ 15,00</span>
+                    <span>R$ 35,00</span>
+                </div>
+            </div>
+
+            <!-- Últimos Gastos -->
+            <div class="section-header">
+                <div class="section-title">Últimos gastos</div>
+                <a href="extrato.php" class="section-link">Ver tudo</a>
+            </div>
+
+            <div class="transaction-item">
+                <div class="transaction-left">
+                    <div class="transaction-icon">🌭</div>
+                    <div>
+                        <div class="transaction-name">Cantina do Seu Jorge</div>
+                        <div class="transaction-date">23/08, 10:15</div>
+                    </div>
+                </div>
+                <div class="transaction-value">-R$ 6,00</div>
+            </div>
+
+            <div class="transaction-item">
+                <div class="transaction-left">
+                    <div class="transaction-icon">🧃</div>
+                    <div>
+                        <div class="transaction-name">Cantina do Seu Jorge</div>
+                        <div class="transaction-date">23/08, 10:15</div>
+                    </div>
+                </div>
+                <div class="transaction-value">-R$ 4,00</div>
+            </div>
+
+            <div class="transaction-item">
+                <div class="transaction-left">
+                    <div class="transaction-icon">✏️</div>
+                    <div>
+                        <div class="transaction-name">Papelaria da Dona Maria</div>
+                        <div class="transaction-date">21/08, 14:20</div>
+                    </div>
+                </div>
+                <div class="transaction-value">-R$ 5,00</div>
+            </div>
+        </div>
+
+        <!-- Menu Inferior Fixo -->
+        <div class="nav-bar">
+            <a href="painel.php" class="nav-item active">
+                <span>🏠</span>
+                Início
+            </a>
+            <a href="educacao-financeira.php" class="nav-item">
+                <span>📖</span>
+                Educação
+            </a>
+            <a href="extrato.php" class="nav-item">
+                <span>📄</span>
+                Extrato
+            </a>
+            <a href="metas.php" class="nav-item">
+                <span>🎯</span>
+                Metas
+            </a>
+            <a href="perfil.php" class="nav-item">
+                <span>👤</span>
+                Perfil
+            </a>
+        </div>
+    </div>
+
+    <!-- Script AJAX para sincronização em tempo real -->
+    <script>
+    function atualizarPainel() {
+        fetch('verificar-atualizacoes.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.erro) return;
+
+                const elementoSaldo = document.getElementById('saldo-atual');
+                if (elementoSaldo) {
+                    elementoSaldo.innerText = "R$ " + data.saldo;
+                }
+
+                if (data.notificacoes && data.notificacoes.length > 0) {
+                    data.notificacoes.forEach(notif => {
+                        alert("🔔 Nova Notificação: " + notif.mensagem);
+                    });
+                }
+            })
+            .catch(error => console.error('Erro ao atualizar:', error));
+    }
+
+    setInterval(atualizarPainel, 4000);
+    </script>
+</body>
+</html>
