@@ -229,31 +229,28 @@
             </div>
         </div>
 
-        <!-- Formulário -->
-        <!-- Formulário -->
-<form action="processar-login.php" method="POST">
-    <!-- Formulário de Login -->
+        <!-- Formulário junto(Unificado)-->
+        <form action="services/auth-service/login.php" method="POST">
+    
     <div class="form-group">
-        <label for="matricula">RA + dígito</label>
-        <div class="input-wrapper">
-            <input type="text" id="matricula" name="matricula" placeholder="Ex: 10 dígitos no total" maxlength="10" required>
-        </div>
+        <label for="usuario">E-mail, CPF ou RA</label>
+        <input type="text" id="usuario" name="usuario" placeholder="Digite seu e-mail, CPF ou RA" required>
     </div>
+    
     <div class="form-group">
         <label for="senha">Senha</label>
-        <div class="input-wrapper">
-            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
-        </div>
+        <input type="password" id="senha" name="senha" placeholder="Sua senha" required>
     </div>
 
     <div style="margin-bottom: 15px; text-align: right;">
-        <a href="http://localhost/banco-eras/esqueci-senha.php" style="font-size: 13px; color: #1e3a8a; text-decoration: none;">Esqueceu a senha?</a>
+        <a href="esqueci-senha.php" style="font-size: 13px; color: #1e3a8a; text-decoration: none;">Esqueceu a senha?</a>
     </div>
 
-    <!-- Botão de submeter o formulário (agora envia os dados para o processar-login.php) -->
-    <button type="submit" class="btn-entrar" style="width: 100%; border: none; cursor: pointer; text-align: center; box-sizing: border-box; line-height: 45px;">Entrar</button>
+    <!-- Botão Único de Submissão -->
+    <button type="submit" class="btn-entrar" style="width: 100%; border: none; cursor: pointer; text-align: center; box-sizing: border-box; line-height: 30px;">Entrar</button>
 
     <div class="register-footer" style="margin-top: 15px; text-align: center;">
-        Primeiro acesso? <a href="http://localhost/banco-eras/cadastro-estudante.php">Cadastre-se aqui</a>
+        Primeiro acesso? <a href="cadastro-estudante.php" style="color: #1e3a8a; font-weight: bold; text-decoration: none;">Cadastre-se aqui</a>
     </div>
+
 </form>

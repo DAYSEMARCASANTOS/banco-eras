@@ -1,3 +1,69 @@
+<?php
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'secure' => false,
+    'httponly' => true
+]);
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once 'conexao.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $usuario = trim($_POST['usuario'] ?? '');
+    $senha   = $_POST['senha'] ?? '';
+
+    // Mensagem genérica para impedir que hackers descubram se o e-mail/RA existe
+    $erroGenerico = "Credenciais inválidas. Verifique os dados digitados.";
+
+    if (empty($usuario) || empty($senha)) {
+        header("Location: ../../login-estudante.php?erro=" . urlencode("Preencha todos os campos"));
+        exit();
+    }
+
+    // Busca por e-mail ou RA (sem revelar o perfil na consulta)
+    $stmt = $conn->prepare("SELECT id_estudante, nome, senha, tipo_usuario FROM estudantes WHERE email = ? OR ra = ?");
+    $stmt->bind_param("ss", $usuario, $usuario);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($user = $result->fetch_assoc()) {
+        // Validação segura de senha criptografada
+        if (password_verify($senha, $user['senha'])) {
+            
+            // Grava os dados essenciais na sessão
+            $_SESSION['usuario_id']   = $user['id_estudante'];
+            $_SESSION['usuario_nome'] = $user['nome'];
+            $_SESSION['tipo_usuario'] = $user['tipo_usuario'];
+
+            session_write_close();
+
+            // Redirecionamento inteligente baseado no tipo de perfil
+            switch ($user['tipo_usuario']) {
+                case 'admin':
+                    header("Location: ../../painel-admin.php");
+                    break;
+                case 'professor':
+                    header("Location: ../../painel-professor.php");
+                    break;
+                case 'estudante':
+                default:
+                    header("Location: ../../painel.php");
+                    break;
+            }
+            exit();
+        }
+    }
+
+    // Se o utilizador não existir ou a senha for incorreta, devolve o mesmo erro
+    header("Location: ../../login-estudante.php?erro=" . urlencode($erroGenerico));
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR" class="h-full">
 <head>
@@ -61,7 +127,7 @@
                     <div class="flex items-center space-x-4">
                         <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-2xl shadow-inner"> </div>
                         <div>
-                            <h2 class="font-bold text-slate-800 text-base">Responsáveli</h2>
+                            <h2 class="font-bold text-slate-800 text-base">Responsável</h2>
                             <p class="text-slate-500 text-xs mt-0.5">Monitore e controle os gastos</p>
                         </div>
                     </div>

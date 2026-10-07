@@ -81,7 +81,7 @@
 
             <!-- Título Principal -->
             <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
-                O banco da sua <br class="hidden md:block">comunidade escolar
+                O Banco da sua <br class="hidden md:block">comunidade escolar
             </h1>
 
             <!-- Subtítulo -->
@@ -140,7 +140,7 @@
                     <div>
                         <div class="flex items-center justify-between mb-4">
                             <div class="w-12 h-12 rounded-xl bg-pink-50 flex items-center justify-center text-2xl shadow-inner">
-                                🎒
+                                
                             </div>
                             <a  href="login.html" class="bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1 rounded-full border border-blue-100">ACESSAR</a>
                         </div>
@@ -159,7 +159,7 @@
                     <div>
                         <div class="flex items-center justify-between mb-4">
                             <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-2xl shadow-inner">
-                                👨‍👩‍👧
+                                
                             </div>
                             <a href="login.html" class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full border border-emerald-100">ACESSAR</a>
                         </div>
@@ -178,7 +178,7 @@
                     <div>
                         <div class="flex items-center justify-between mb-4">
                             <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center text-2xl shadow-inner">
-                                👩‍🏫
+                                
                             </div>
                             <a href="login.html" class="bg-purple-50 text-purple-700 text-xs font-bold px-3 py-1 rounded-full border border-purple-100">ACESSAR</a>
                         </div>
@@ -197,7 +197,7 @@
                     <div>
                         <div class="flex items-center justify-between mb-4">
                             <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shadow-inner">
-                                🛒
+                                
                             </div>
                             <a href="login.html" class="bg-orange-50 text-orange-700 text-xs font-bold px-3 py-1 rounded-full border border-orange-100">ACESSAR</a>
                         </div>
@@ -218,7 +218,7 @@
                 <div>
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-2xl shadow-inner">
-                            🏫
+                            
                         </div>
                         <a href="login.html" class="bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full border border-indigo-100">ACESSAR</a>
                     </div>

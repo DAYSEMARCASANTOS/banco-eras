@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Tempo de geração: 05/10/2026 às 01:43
--- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -76,9 +67,8 @@ CREATE TABLE `notificacoes` (
   `data_criacao` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Índices para tabelas despejadas
---
+ALTER TABLE estudantes 
+  ADD COLUMN tipo_usuario VARCHAR(20) NOT NULL DEFAULT 'estudante';
 
 --
 -- Índices de tabela `estudantes`

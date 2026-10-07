@@ -1,31 +1,27 @@
 <?php
-session_start();
-
-// Verifica se o estudante está logado
-if (!isset($_SESSION['ra'])) {
-    header("Location: login-estudante.php");
-    exit;
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
-$servidor = "localhost";
-$usuario = "root";
-$senha_db = "";
-$banco = "banco_eras";
-
-$conexao = new mysqli($servidor, $usuario, $senha_db, $banco);
-
-if ($conexao->connect_error) {
-    die("Falha na conexão: " . $conexao->connect_error);
+// Bloqueia quem não está logado
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: login-estudante.php?erro=Acesso+negado");
+    exit();
 }
 
-// Pega os dados do estudante usando o RA guardado na sessão
-$ra_logado = $_SESSION['ra'];
-$sql = "SELECT * FROM estudantes WHERE ra = '$ra_logado'";
-$resultado = $conexao->query($sql);
+// Magapuanan ti datos ti estudiante babaen iti Prepared Statement (SQL Injection Protection)
+$ra_logado = $_SESSION['ra'] ?? '';
+
+$stmt = $conexao->prepare("SELECT * FROM estudantes WHERE ra = ?");
+$stmt->bind_param("s", $ra_logado);
+$stmt->execute();
+$resultado = $stmt->get_result();
 $estudante = $resultado->fetch_assoc();
 
+$stmt->close();
 $conexao->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
