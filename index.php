@@ -58,7 +58,7 @@
 
             <!-- Botão Acessar -->
             <div>
-                <a href="login.html" class="bg-white text-blue-900 font-semibold px-6 py-2.5 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 transform hover:scale-105">
+                <a href="login.php" class="bg-white text-blue-900 font-semibold px-6 py-2.5 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 transform hover:scale-105">
                     Acessar
                 </a>
             </div>
@@ -91,7 +91,7 @@
 
             <!-- Botão de Ação -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="login.html" class="w-full sm:w-auto bg-white text-blue-900 font-bold px-8 py-4 rounded-full shadow-xl hover:bg-blue-50 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center space-x-2 group">
+                <a href="login.php" class="w-full sm:w-auto bg-white text-blue-900 font-bold px-8 py-4 rounded-full shadow-xl hover:bg-blue-50 transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center space-x-2 group">
                     <span>Começar agora</span>
                     <i class="fa-solid.fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                     <span class="sr-only">Seta para a direita</span>
@@ -139,10 +139,8 @@
                 <div class="bg-white p-6 rounded-2xl border border-blue-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between reveal group">
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-pink-50 flex items-center justify-center text-2xl shadow-inner">
-                                
-                            </div>
-                            <a  href="login.html" class="bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1 rounded-full border border-blue-100">ACESSAR</a>
+                            <div class="w-12 h-12 rounded-xl bg-pink-50 flex items-center justify-center text-2xl shadow-inner">E</div>
+                            <a  href="login.php" class="bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1 rounded-full border border-blue-100">ACESSAR</a>
                         </div>
                         <h3 class="text-xl font-bold text-slate-800 mb-2">Estudante</h3>
                         <p class="text-slate-600 text-sm leading-relaxed">
@@ -158,10 +156,8 @@
                 <div class="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between reveal group">
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-2xl shadow-inner">
-                                
-                            </div>
-                            <a href="login.html" class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full border border-emerald-100">ACESSAR</a>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-2xl shadow-inner">R</div>
+                            <a href="login.php" class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full border border-emerald-100">ACESSAR</a>
                         </div>
                         <h3 class="text-xl font-bold text-slate-800 mb-2">Responsável</h3>
                         <p class="text-slate-600 text-sm leading-relaxed">
@@ -177,10 +173,8 @@
                 <div class="bg-white p-6 rounded-2xl border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between reveal group">
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center text-2xl shadow-inner">
-                                
-                            </div>
-                            <a href="login.html" class="bg-purple-50 text-purple-700 text-xs font-bold px-3 py-1 rounded-full border border-purple-100">ACESSAR</a>
+                            <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center text-2xl shadow-inner">P</div>
+                            <a href="login.php" class="bg-purple-50 text-purple-700 text-xs font-bold px-3 py-1 rounded-full border border-purple-100">ACESSAR</a>
                         </div>
                         <h3 class="text-xl font-bold text-slate-800 mb-2">Professor</h3>
                         <p class="text-slate-600 text-sm leading-relaxed">
@@ -196,10 +190,8 @@
                 <div class="bg-white p-6 rounded-2xl border border-orange-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between reveal group">
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shadow-inner">
-                                
-                            </div>
-                            <a href="login.html" class="bg-orange-50 text-orange-700 text-xs font-bold px-3 py-1 rounded-full border border-orange-100">ACESSAR</a>
+                            <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shadow-inner">V</div>
+                            <a href="login.php" class="bg-orange-50 text-orange-700 text-xs font-bold px-3 py-1 rounded-full border border-orange-100">ACESSAR</a>
                         </div>
                         <h3 class="text-xl font-bold text-slate-800 mb-2">Vendedor</h3>
                         <p class="text-slate-600 text-sm leading-relaxed">
@@ -217,12 +209,10 @@
             <div class="mt-6 max-w-2xl mx-auto bg-white p-6 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between reveal group">
                 <div>
                     <div class="flex items-center justify-between mb-4">
-                        <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-2xl shadow-inner">
-                            
-                        </div>
-                        <a href="login.html" class="bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full border border-indigo-100">ACESSAR</a>
+                        <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-2xl shadow-inner">ES</div>
+                        <a href="login.php" class="bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full border border-indigo-100">ACESSAR</a>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-800 mb-2">Escola</h3>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Escola/Gestão</h3>
                     <p class="text-slate-600 text-sm leading-relaxed">
                         Administre alunos e gerencie contas
                     </p>

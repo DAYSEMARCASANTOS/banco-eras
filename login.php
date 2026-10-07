@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <!-- Voltar para a Home -->
         <div class="mb-6">
-            <a href="index.html" class="inline-flex items-center text-sm text-slate-500 hover:text-blue-900 transition-colors">
+            <a href="index.php" class="inline-flex items-center text-sm text-slate-500 hover:text-blue-900 transition-colors">
                 <i class="fa-solid fa-arrow-left mr-2"></i> Voltar para a página inicial
             </a>
         </div>
@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="http://localhost/banco-eras-main/login-estudante.php" class="block bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-400 transition-all duration-300 group">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-pink-50 flex items-center justify-center text-2xl shadow-inner"> </div>
+                        <div class="w-12 h-12 rounded-xl bg-pink-50 flex items-center justify-center text-2xl shadow-inner">E</div>
                         <div>
                             <h2 class="font-bold text-slate-800 text-base">Estudante</h2>
                             <p class="text-slate-500 text-xs mt-0.5">Consulte saldo e faça pagamentos</p>
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="#" class="block bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-emerald-400 transition-all duration-300 group">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-2xl shadow-inner"> </div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-2xl shadow-inner">R</div>
                         <div>
                             <h2 class="font-bold text-slate-800 text-base">Responsável</h2>
                             <p class="text-slate-500 text-xs mt-0.5">Monitore e controle os gastos</p>
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="#" class="block bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-purple-400 transition-all duration-300 group">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center text-2xl shadow-inner"> </div>
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center text-2xl shadow-inner">P</div>
                         <div>
                             <h2 class="font-bold text-slate-800 text-base">Professor(a)</h2>
                             <p class="text-slate-500 text-xs mt-0.5">Consulte saldo e faça pagamentos</p>
@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="#" class="block bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-orange-400 transition-all duration-300 group">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shadow-inner"> </div>
+                        <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-2xl shadow-inner">V</div>
                         <div>
                             <h2 class="font-bold text-slate-800 text-base">Vendedor / Cantina</h2>
                             <p class="text-slate-500 text-xs mt-0.5">Gerencie vendas e produtos</p>
@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="#" class="block bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-indigo-400 transition-all duration-300 group">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-2xl shadow-inner"> </div>
+                        <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-2xl shadow-inner">ES</div>
                         <div>
                             <h2 class="font-bold text-slate-800 text-base">Escola / Gestão</h2>
                             <p class="text-slate-500 text-xs mt-0.5">Painel administrativo completo</p>

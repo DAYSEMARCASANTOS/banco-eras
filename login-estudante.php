@@ -218,11 +218,11 @@
         <p class="brand-subtitle">O banco do ecossistema escolar</p>
 
         <!-- Voltar / Trocar Perfil -->
-        <a href="login.html" class="trocar-perfil">← Trocar perfil</a>
+        <a href="login.php" class="trocar-perfil">← Trocar perfil</a>
 
         <!-- Card Perfil Estudante Selecionado -->
         <div class="profile-card">
-            <div class="profile-icon">🎒</div>
+            <div class="profile-icon">E</div>
             <div class="profile-info">
                 <h3>Estudante</h3>
                 <p>Consulte saldo e faça pagamentos</p>
